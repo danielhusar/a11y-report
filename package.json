@@ -1,6 +1,6 @@
 {
   "name": "@daniel.husar/a11y-report",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Print accessibility report via axe-core",
   "scripts": {
     "test": "jest",
@@ -14,7 +14,11 @@
   },
   "keywords": [
     "accessibility",
-    "a11y"
+    "a11y",
+    "report",
+    "ci",
+    "axe",
+    "axe-core"
   ],
   "license": "MIT",
   "private": false,
