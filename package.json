@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "bin": {
-    "a11y-report": "index.js"
+    "a11y-report": "cli.js"
   },
   "author": "Daniel Husar",
   "repository": {
