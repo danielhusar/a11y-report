@@ -12,6 +12,7 @@ const runAxe = config =>
 
 const baseConfig = {
   delay: 1000,
+  axeUrl: undefined,
   ignoreViolations: [],
   ignoreViolationsForUrls: {},
   errorTags: ['wcag2a', 'wcag2aa', 'wcag21aa'],

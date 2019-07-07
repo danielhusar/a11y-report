@@ -2,7 +2,7 @@
 > Run accessibility report on the provided urls via [axe-core](https://github.com/dequelabs/axe-core)
 
 ## How it works
-It will use [puppeeter](https://github.com/GoogleChrome/puppeteer) to run axe-core on all provided urls, and collect all violations.
+It will use [puppeeter](https://github.com/GoogleChrome/puppeteer) to run axe-core on all provided urls, and collect all violations. After it prints whole report it will process exit. Make sure you have at least axe-core ^3.0.0 in your pages. You can also provide axe url to be automatically injected for you.
 
 ## Install
 
@@ -30,7 +30,7 @@ report(config);
 
 ### report(config)
 
-Returns void and prints accessibility report.
+Returns void and prints accessibility report. It will process exit with 1 if there are any errors, or 0 with no errors.
 
 #### urls
 
@@ -46,6 +46,15 @@ Default: `1000`
 
 Delay to wait for `axe-core` to be executed.
 
+#### axeUrl
+
+Type: `string | undefined`
+
+Default: `undefined`
+
+Every page needs axe-core script to be loaded. If your pages don't load axe-core, you can provide axe-core url to be injected.
+Example: `https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.2.2/axe.min.js`
+
 #### ignoreViolations
 
 Type: `string[]`
@@ -56,7 +65,7 @@ Global array of all violations that should be ignored.
 
 Type: `object`
 
-Example: `ignoreViolationsForUrls: { 'http://localhost:9001/index.html': ['Error to ignore'] }`
+Example: `ignoreViolationsForUrls: { 'http://localhost:9001/index.html': ['Violation to ignore'] }`
 
 Mappings of violations per url to ignore.
 
