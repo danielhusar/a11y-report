@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "xo",
+    "prettier"
+  ],
+  "rules": {
+    "capitalized-comments": [0],
+    "no-await-in-loop": [0]
+  }
+}

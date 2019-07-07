@@ -1,21 +1,11 @@
 const fs = require('fs');
 const { platform } = require('os');
-const path = require('path');
 const puppeteer = require('puppeteer');
 const { green, red, yellow, blue } = require('chalk');
 const express = require('express');
 const glob = require('glob');
-const cheerio = require('cheerio');
 const axe = require.resolve('axe-core');
 const config = require('./config');
-
-fs.copyFileSync(axe, `${config.publicFolder}/axe.js`);
-const files = glob
-  .sync(`${config.publicFolder}/**/*.html`)
-  .map(file => {
-    return file.replace(config.publicFolder, '').replace(/\/?index\.html$/, '') || '/';
-  })
-  .sort();
 
 const runAxe = config =>
   new Promise((resolve, reject) => {
@@ -25,19 +15,14 @@ const runAxe = config =>
   });
 
 module.exports = () => {
+  fs.copyFileSync(axe, `${config.publicFolder}/axe.js`);
+  const files = glob
+    .sync(`${config.publicFolder}/**/*.html`)
+    .map(file => file.replace(config.publicFolder, '').replace(/\/?index\.html$/, '/') || '/')
+    .sort();
+
   const app = express();
-  for (let file of files) {
-    app.get(file, (_, res) => {
-      if (!file.endsWith('.html')) {
-        file = `${file.replace(/\/$/, '')}/index.html`;
-      }
-      const html = fs.readFileSync(config.publicFolder + file, 'utf8');
-      const $ = cheerio.load(html);
-      $('body').append('<script src="/axe.js"></script>');
-      res.send($.html());
-    });
-  }
-  app.use(express.static(config.publicFolder, { redirect: false, index: false }));
+  app.use(express.static(config.publicFolder, { redirect: false }));
 
   const server = app.listen(config.port, async () => {
     const launchArgs = [];
@@ -50,6 +35,7 @@ module.exports = () => {
     let totalWarnings = 0;
     for (const file of files) {
       await page.goto(`http://localhost:${config.port}${file}`);
+      await page.addScriptTag({ url: `/axe.js` });
       const { violations, passes } = await page.evaluate(runAxe, config);
       const failures = [];
       const warnings = [];
@@ -75,6 +61,7 @@ module.exports = () => {
       totalFailures += failures.length;
       totalWarnings += warnings.length;
     }
+
     await browser.close();
 
     console.log(
