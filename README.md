@@ -2,7 +2,9 @@
 > Run accessibility report on the provided urls via [axe-core](https://github.com/dequelabs/axe-core)
 
 ## How it works
-It will use [puppeeter](https://github.com/GoogleChrome/puppeteer) to run axe-core on all provided urls, and collect all violations. After it prints whole report it will process exit. Make sure you have at least axe-core ^3.0.0 in your pages. You can also provide axe url to be automatically injected for you.
+It will use [puppeeter](https://github.com/GoogleChrome/puppeteer) to run axe-core on all provided urls, and collect all violations. After it prints whole report it will process exit. Make sure you have at least axe-core ^3.0.0 in your pages. You can also provide [axe url](#axeurl) to be automatically injected for you.
+
+![screenshot.png](screenshot.png)
 
 ## Install
 
