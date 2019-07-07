@@ -4,7 +4,10 @@
     "prettier"
   ],
   "rules": {
-    "capitalized-comments": [0],
-    "no-await-in-loop": [0]
+    "no-await-in-loop": [0],
+    "capitalized-comments": [0]
+  },
+  "env": {
+    "jest": true
   }
 }

@@ -1,15 +1,12 @@
 {
   "name": "@daniel.husar/a11y-report",
   "version": "1.0.0",
-  "description": "Accessibility report via axe",
+  "description": "Print accessibility report via axe-core",
   "scripts": {
     "test": "jest",
     "lint": "eslint ."
   },
   "main": "index.js",
-  "bin": {
-    "a11y-report": "cli.js"
-  },
   "author": "Daniel Husar",
   "repository": {
     "type": "git",
@@ -28,8 +25,6 @@
   "dependencies": {
     "axe-core": "^3.2.2",
     "chalk": "^2.4.2",
-    "express": "^4.17.1",
-    "glob": "^7.1.4",
     "puppeteer": "^1.18.1"
   },
   "devDependencies": {
