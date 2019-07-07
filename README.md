@@ -22,7 +22,8 @@ npm install --dev @daniel.husar/a11y-report
 const report = require('@daniel.husar/a11y-report');
 
 const config = {
-  urls: ['http://localhost:9001/index.html']
+  urls: ['http://localhost:9001/index.html'],
+  axeUrl: 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.2.2/axe.min.js'
 }
 
 report(config);
