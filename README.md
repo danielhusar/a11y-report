@@ -35,7 +35,7 @@ import a11yReport from '@daniel.husar/a11y-report';
 
 ### a11yReport(config)
 
-Returns counts of passes, failures, warnings and prints accessibility report with logger function.
+Prints accessibility report with logger function and returns counts of passes, failures and warnings.
 
 #### config
 
