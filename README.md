@@ -1,4 +1,4 @@
-# a11y-report
+# a11y-report [![Build Status](https://travis-ci.org/danielhusar/a11y-report.svg?branch=master)](https://travis-ci.org/danielhusar/a11y-report)
 > Run accessibility report on the provided urls via [axe-core](https://github.com/dequelabs/axe-core)
 
 ## How it works
