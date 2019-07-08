@@ -6,25 +6,25 @@ const axe = require.resolve('axe-core');
 const runAxe = config =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
-      axe.run(config.axe.context, config.axe.config, (error, result) => (error ? reject(error) : resolve(result)));
+      axe.run(config.axe.context, config.axe.options, (error, result) => (error ? reject(error) : resolve(result)));
     }, config.delay);
   });
 
 const baseConfig = {
-  delay: 1000,
+  delay: 100,
   axeUrl: undefined,
   ignoreViolations: [],
   ignoreViolationsForUrls: {},
   errorTags: ['wcag2a', 'wcag2aa', 'wcag21aa'],
+  reporter: 'default',
+  logger: console.log,
+  exitProcess: true,
   axe: {
     context: {
-      include: ['body'],
+      include: ['html'],
     },
-    config: {},
     options: {},
   },
-  reporter: 'default', // Reporters: default, simple
-  logger: console.log,
 };
 
 module.exports = async userConfig => {
@@ -60,9 +60,10 @@ module.exports = async userConfig => {
       }
     });
 
-    const showFileName = failures.length || warnings.length || config.reporter === 'default';
+    const isDefaultReporter = config.reporter === 'default';
+    const showFileName = failures.length || warnings.length || isDefaultReporter;
     if (showFileName) config.logger(blue(url));
-    if (config.reporter === 'default') passes.forEach(({ description }) => config.logger(`  ${green('PASS')}: ${description}`));
+    if (isDefaultReporter) passes.forEach(({ description }) => config.logger(`  ${green('PASS')}: ${description}`));
     warnings.forEach(({ description }) => config.logger(`  ${yellow('WARN')}: ${description}`));
     failures.forEach(({ description }) => config.logger(`  ${red('FAIL')}: ${description}`));
     if (showFileName) config.logger('');
@@ -79,5 +80,5 @@ module.exports = async userConfig => {
       totalWarnings +
       totalPasses} total`
   );
-  process.exit(totalFailures ? 1 : 0);
+  if (config.exitProcess) process.exit(totalFailures ? 1 : 0);
 };

@@ -47,7 +47,7 @@ Array of urls to run report on.
 
 Type: `number`
 
-Default: `1000`
+Default: `100`
 
 Delay to wait for `axe-core` to be executed.
 
@@ -98,6 +98,14 @@ Default: 'console.log`
 
 Logger function to use.
 
+#### exitProcess
+
+Type: `boolean`
+
+Default: `true`
+
+If the current process should exit with exit code 1 if there are errors, or 0 for no errors.
+
 #### axe
 
 Type: `object`
@@ -107,16 +115,9 @@ Type: `object`
 ##### axe.context
 Type: `object`
 
-Default: `element: { include: ['body'] }`
+Default: `element: { include: ['html'] }`
 
 [Context parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#context-parameter).
-
-##### axe.config
-Type: `object`
-
-Default: `{}`
-
-[Axe-core configuration options](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#parameters-1).
 
 ##### axe.options
 Type: `object`
