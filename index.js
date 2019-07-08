@@ -80,5 +80,10 @@ module.exports = async userConfig => {
       totalWarnings +
       totalPasses} total`
   );
-  if (config.exitProcess) process.exit(totalFailures ? 1 : 0);
+
+  return {
+    failures: totalFailures,
+    warnings: totalWarnings,
+    passes: totalPasses,
+  };
 };

@@ -21,21 +21,21 @@ npm install --dev @daniel.husar/a11y-report
 ## Usage
 
 ```js
-const report = require('@daniel.husar/a11y-report');
+import a11yReport from '@daniel.husar/a11y-report';
 
-const config = {
-  urls: ['http://localhost:9001/index.html'],
-  axeUrl: 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.2.2/axe.min.js'
-}
-
-report(config);
+(async () => {
+  const report = await a11yReport({
+    urls: ['http://localhost:9001/index.html'],
+    axeUrl: 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.2.2/axe.min.js'
+  });
+})();
 ```
 
 ## API
 
-### report(config)
+### a11yReport(config)
 
-Returns void and prints accessibility report. It will process exit with 1 if there are any errors, or 0 with no errors.
+Returns counts of passes, failures, warnings and prints accessibility report with logger function.
 
 #### config
 
@@ -49,7 +49,6 @@ Returns void and prints accessibility report. It will process exit with 1 if the
 | `errorTags`               | `string[]`  | `['wcag2a', 'wcag2aa', 'wcag21aa']` | Array of [tags](https://www.deque.com/axe/axe-for-web/documentation/api-documentation/#parameters) which would consider violation as error. |
 | `reporter`                | `default`   | `simple` or `default`        | Which reporter to use. |
 | `logger`                  | `function`  | `console.log`             | Logger function to use. |
-| `exitProcess`             | `boolean `  | `true`                    | Exit current process with exit code 1 if there are errors, or 0 for no errors. |
 | `axe`                     | `{}`        |                           | [Axe-core](https://github.com/dequelabs/axe-core) config. |
 | `axe.context`             | `{}`        | `element: { include: ['html'] }` | [Context parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#context-parameter). |
 | `axe.options`             | `{}`        | `{}` | [Axe-core options parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter). |

@@ -1,6 +1,6 @@
 const { resolve } = require('path');
 const express = require('express');
-const report = require('../index');
+const a11yReport = require('../index');
 
 jest.mock('chalk', () => ({
   green: string => string,
@@ -25,9 +25,8 @@ afterAll(() => {
 describe('a11y-report', () => {
   test('with defaults', async () => {
     const logger = jest.fn();
-    await report({
+    const report = await a11yReport({
       urls: ['http://localhost:9001/default.html'],
-      exitProcess: false,
       reporter: 'simple',
       logger,
     });
@@ -39,37 +38,49 @@ describe('a11y-report', () => {
     expect(logger).toHaveBeenNthCalledWith(3, '  WARN: Ensures all page content is contained by landmarks');
     expect(logger).toHaveBeenNthCalledWith(4, '  FAIL: Ensures every HTML document has a lang attribute');
     expect(logger).toHaveBeenLastCalledWith('1 failures, 2 warnings, 9 passed, 12 total');
+    expect(report).toEqual({
+      failures: 1,
+      passes: 9,
+      warnings: 2,
+    });
   });
 
   test('with no error tags', async () => {
     const logger = jest.fn();
-    await report({
+    const report = await a11yReport({
       urls: ['http://localhost:9001/default.html'],
-      exitProcess: false,
       errorTags: [],
       reporter: 'simple',
       logger,
     });
     expect(logger).toHaveBeenLastCalledWith('0 failures, 3 warnings, 9 passed, 12 total');
+    expect(report).toEqual({
+      failures: 0,
+      passes: 9,
+      warnings: 3,
+    });
   });
 
   test('with ignoreViolations', async () => {
     const logger = jest.fn();
-    await report({
+    const report = await a11yReport({
       urls: ['http://localhost:9001/default.html'],
-      exitProcess: false,
       ignoreViolations: ['Ensures every HTML document has a lang attribute'],
       reporter: 'simple',
       logger,
     });
     expect(logger).toHaveBeenLastCalledWith('0 failures, 2 warnings, 9 passed, 11 total');
+    expect(report).toEqual({
+      failures: 0,
+      passes: 9,
+      warnings: 2,
+    });
   });
 
   test('with ignoreViolationsForUrls', async () => {
     const logger = jest.fn();
-    await report({
+    const report = await a11yReport({
       urls: ['http://localhost:9001/default.html'],
-      exitProcess: false,
       ignoreViolationsForUrls: {
         'http://localhost:9001/default.html': ['Ensures every HTML document has a lang attribute'],
       },
@@ -77,13 +88,17 @@ describe('a11y-report', () => {
       logger,
     });
     expect(logger).toHaveBeenLastCalledWith('0 failures, 2 warnings, 9 passed, 11 total');
+    expect(report).toEqual({
+      failures: 0,
+      passes: 9,
+      warnings: 2,
+    });
   });
 
   test('with default reporter', async () => {
     const logger = jest.fn();
-    await report({
+    await a11yReport({
       urls: ['http://localhost:9001/default.html'],
-      exitProcess: false,
       logger,
     });
     expect(logger).toHaveBeenNthCalledWith(2, "  PASS: Ensures aria-hidden='true' is not present on the document body.");
@@ -92,12 +107,16 @@ describe('a11y-report', () => {
 
   test('with axe injected', async () => {
     const logger = jest.fn();
-    await report({
+    const report = await a11yReport({
       urls: ['http://localhost:9001/no-axe.html'],
-      exitProcess: false,
       axeUrl: '/axe.min.js',
       logger,
     });
     expect(logger).toHaveBeenLastCalledWith('1 failures, 2 warnings, 9 passed, 12 total');
+    expect(report).toEqual({
+      failures: 1,
+      passes: 9,
+      warnings: 2,
+    });
   });
 });
