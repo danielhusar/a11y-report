@@ -80,7 +80,7 @@ Type: `string[]`
 
 Default: `['wcag2a', 'wcag2aa', 'wcag21aa']`
 
-Array of tags which would consider violation as error or warning.
+Array of [tags](https://www.deque.com/axe/axe-for-web/documentation/api-documentation/#parameters) which would consider violation as error.
 
 #### reporter
 
@@ -104,7 +104,7 @@ Type: `boolean`
 
 Default: `true`
 
-If the current process should exit with exit code 1 if there are errors, or 0 for no errors.
+Exit current process with exit code 1 if there are errors, or 0 for no errors.
 
 #### axe
 
