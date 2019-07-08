@@ -1,6 +1,6 @@
 {
   "name": "@daniel.husar/a11y-report",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Print accessibility report via axe-core",
   "scripts": {
     "test": "npm run lint && npm run unit",
