@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Print accessibility report via axe-core",
   "scripts": {
-    "test": "jest",
+    "test": "npm run lint && npm run unit",
+    "unit": "jest",
     "lint": "eslint ."
   },
   "main": "index.js",
