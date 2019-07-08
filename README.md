@@ -4,7 +4,7 @@
 ## How it works
 Using [puppeeter](https://github.com/GoogleChrome/puppeteer) we run axe-core on all provided urls and collect all violations.
 
-Make sure you have at least axe-core ^3.0.0 loaded in your pages or provide [axe url](#axeurl) to be automatically injected for you.
+Make sure you have at least axe-core ^3.0.0 loaded in your urls or provide axe url to be automatically injected for you.
 
 ![screenshot.png](screenshot.png)
 
@@ -40,7 +40,7 @@ Returns void and prints accessibility report. It will process exit with 1 if the
 #### config
 
 | Property                  | Type        | Default                   | Description                                                                                                                   |
-| ------------------------- | :---------- | :-----------------------  | :---------- |
+| :------------------------ | :---------- | :-----------------------  | :---------- |
 | `urls`                    | `string[]`  | `[]`                      | Array of urls to run report on. |
 | `delay`                   | `number`    | `100`                     | Delay to wait for `axe-core` to be executed. |
 | `axeUrl`                  | `string`    | `undefined`               | Every page needs axe-core script to be loaded. If your pages don't load axe-core, you can provide axe-core url to be injected. |
