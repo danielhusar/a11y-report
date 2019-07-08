@@ -37,94 +37,22 @@ report(config);
 
 Returns void and prints accessibility report. It will process exit with 1 if there are any errors, or 0 with no errors.
 
-#### urls
+#### config
 
-Type: `string[]`
-
-Array of urls to run report on.
-
-#### delay
-
-Type: `number`
-
-Default: `100`
-
-Delay to wait for `axe-core` to be executed.
-
-#### axeUrl
-
-Type: `string | undefined`
-
-Default: `undefined`
-
-Every page needs axe-core script to be loaded. If your pages don't load axe-core, you can provide axe-core url to be injected.
-Example: `https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.2.2/axe.min.js`
-
-#### ignoreViolations
-
-Type: `string[]`
-
-Global array of all violations that should be ignored.
-
-#### ignoreViolationsForUrls
-
-Type: `object`
-
-Example: `ignoreViolationsForUrls: { 'http://localhost:9001/index.html': ['Violation to ignore'] }`
-
-Mappings of violations per url to ignore.
-
-#### errorTags
-
-Type: `string[]`
-
-Default: `['wcag2a', 'wcag2aa', 'wcag21aa']`
-
-Array of [tags](https://www.deque.com/axe/axe-for-web/documentation/api-documentation/#parameters) which would consider violation as error.
-
-#### reporter
-
-Type: `default | simple`
-
-Default: 'default'
-
-Which reporter to use.
-
-#### logger
-
-Type: `fn`
-
-Default: 'console.log`
-
-Logger function to use.
-
-#### exitProcess
-
-Type: `boolean`
-
-Default: `true`
-
-Exit current process with exit code 1 if there are errors, or 0 for no errors.
-
-#### axe
-
-Type: `object`
-
-[Axe-core](https://github.com/dequelabs/axe-core) config.
-
-##### axe.context
-Type: `object`
-
-Default: `element: { include: ['html'] }`
-
-[Context parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#context-parameter).
-
-##### axe.options
-Type: `object`
-
-Default: `{}`
-
-[Axe-core options parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter).
+| Property                  | Type        | Default                   | Description                                                                                                                   |
+| ------------------------- | :---------- | :-----------------------  | :---------- |
+| `urls`                    | `string[]`  | `[]`                      | Array of urls to run report on. |
+| `delay`                   | `number`    | `100`                     | Delay to wait for `axe-core` to be executed. |
+| `axeUrl`                  | `string`    | `undefined`               | Every page needs axe-core script to be loaded. If your pages don't load axe-core, you can provide axe-core url to be injected. |
+| `ignoreViolations`        | `string[]`  | `[]`                      | Global array of all violations that should be ignored. |
+| `ignoreViolationsForUrls` | `{}`        | `[]`                      | Mappings of violations per url to ignore. Example: `ignoreViolationsForUrls: { 'http://localhost:9001/index.html': ['Violation to ignore'] }` |
+| `errorTags`               | `string[]`  | `['wcag2a', 'wcag2aa', 'wcag21aa']` | Array of [tags](https://www.deque.com/axe/axe-for-web/documentation/api-documentation/#parameters) which would consider violation as error. |
+| `reporter`                | `default | simple`  | `default`         | Which reporter to use. |
+| `logger`                  | `function`  | `console.log`             | Logger function to use. |
+| `exitProcess`             | `boolean `  | `true`                    | Exit current process with exit code 1 if there are errors, or 0 for no errors. |
+| `axe`                     | `{}`        |                           | [Axe-core](https://github.com/dequelabs/axe-core) config. |
+| `axe.context`             | `{}`        | `element: { include: ['html'] }` | [Context parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#context-parameter). |
+| `axe.options`             | `{}`        | `{}` | [Axe-core options parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter). |
 
 ## License
 MIT
