@@ -47,7 +47,7 @@ Returns void and prints accessibility report. It will process exit with 1 if the
 | `ignoreViolations`        | `string[]`  | `[]`                      | Global array of all violations that should be ignored. |
 | `ignoreViolationsForUrls` | `{}`        | `[]`                      | Mappings of violations per url to ignore. Example: `{ 'http://localhost:9001/index.html': ['Violation to ignore'] }` |
 | `errorTags`               | `string[]`  | `['wcag2a', 'wcag2aa', 'wcag21aa']` | Array of [tags](https://www.deque.com/axe/axe-for-web/documentation/api-documentation/#parameters) which would consider violation as error. |
-| `reporter`                | `default`   | `simple | default`        | Which reporter to use. |
+| `reporter`                | `default`   | `simple` or `default`        | Which reporter to use. |
 | `logger`                  | `function`  | `console.log`             | Logger function to use. |
 | `exitProcess`             | `boolean `  | `true`                    | Exit current process with exit code 1 if there are errors, or 0 for no errors. |
 | `axe`                     | `{}`        |                           | [Axe-core](https://github.com/dequelabs/axe-core) config. |
