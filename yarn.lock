@@ -139,6 +139,15 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@daniel.husar/a11y-report@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@daniel.husar/a11y-report/-/a11y-report-1.0.3.tgz#ecaa2765e71ac258c656174584e2a4b2761f3145"
+  integrity sha512-Fpu5BrupQwNO4NdWjJEnNfenHNPTnH6I9tCXRpceklFK57gWxdzbuMgBhDjSrkG91npJ3KIifyh9qG/hdQFjzQ==
+  dependencies:
+    axe-core "^3.2.2"
+    chalk "^2.4.2"
+    puppeteer "^1.18.1"
+
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"

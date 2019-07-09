@@ -1,6 +1,6 @@
 {
   "name": "@daniel.husar/a11y-report",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Print accessibility report via axe-core",
   "scripts": {
     "test": "npm run lint && npm run unit",
@@ -9,7 +9,6 @@
   },
   "main": "index.js",
   "files:": [
-    "README.md",
     "index.js"
   ],
   "author": "Daniel Husar",
@@ -32,6 +31,7 @@
   },
   "homepage": "https://github.com/danielhusar/a11y-report#readme",
   "dependencies": {
+    "@daniel.husar/a11y-report": "^1.0.3",
     "axe-core": "^3.2.2",
     "chalk": "^2.4.2",
     "puppeteer": "^1.18.1"
