@@ -41,36 +41,41 @@ module.exports = async userConfig => {
   let totalPasses = 0;
   let totalWarnings = 0;
   for (const url of config.urls) {
-    await page.goto(url);
-    if (config.axeUrl) {
-      await page.addScriptTag({ url: config.axeUrl });
-    }
-
-    const { violations, passes } = await page.evaluate(runAxe, config);
-    const failures = [];
-    const warnings = [];
-    violations.forEach(item => {
-      if (config.ignoreViolations.includes(item.description)) return;
-      if (config.ignoreViolationsForUrls[url] && config.ignoreViolationsForUrls[url].includes(item.description)) return;
-
-      if (item.tags.some(tag => config.errorTags.includes(tag))) {
-        failures.push(item);
-      } else {
-        warnings.push(item);
+    try {
+      await page.goto(url);
+      if (config.axeUrl) {
+        await page.addScriptTag({ url: config.axeUrl });
       }
-    });
 
-    const isDefaultReporter = config.reporter === 'default';
-    const showFileName = failures.length || warnings.length || isDefaultReporter;
-    if (showFileName) config.logger(blue(url));
-    if (isDefaultReporter) passes.forEach(({ description }) => config.logger(`  ${green('PASS')}: ${description}`));
-    warnings.forEach(({ description }) => config.logger(`  ${yellow('WARN')}: ${description}`));
-    failures.forEach(({ description }) => config.logger(`  ${red('FAIL')}: ${description}`));
-    if (showFileName) config.logger('');
+      const { violations, passes } = await page.evaluate(runAxe, config);
+      const failures = [];
+      const warnings = [];
+      violations.forEach(item => {
+        if (config.ignoreViolations.includes(item.description)) return;
+        if (config.ignoreViolationsForUrls[url] && config.ignoreViolationsForUrls[url].includes(item.description)) return;
 
-    totalPasses += passes.length;
-    totalFailures += failures.length;
-    totalWarnings += warnings.length;
+        if (item.tags.some(tag => config.errorTags.includes(tag))) {
+          failures.push(item);
+        } else {
+          warnings.push(item);
+        }
+      });
+
+      const isDefaultReporter = config.reporter === 'default';
+      const showFileName = failures.length || warnings.length || isDefaultReporter;
+      if (showFileName) config.logger(blue(url));
+      if (isDefaultReporter) passes.forEach(({ description }) => config.logger(`  ${green('PASS')}: ${description}`));
+      warnings.forEach(({ description }) => config.logger(`  ${yellow('WARN')}: ${description}`));
+      failures.forEach(({ description }) => config.logger(`  ${red('FAIL')}: ${description}`));
+      if (showFileName) config.logger('');
+      totalPasses += passes.length;
+      totalFailures += failures.length;
+      totalWarnings += warnings.length;
+    } catch (e) {
+      config.logger(blue(url));
+      config.logger(e);
+      totalFailures++;
+    }
   }
 
   await browser.close();
