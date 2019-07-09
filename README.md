@@ -47,7 +47,7 @@ Prints accessibility report with logger function and returns counts of passes, f
 | `ignoreViolations`        | `string[]`  | `[]`                      | Global array of all violations that should be ignored. |
 | `ignoreViolationsForUrls` | `{}`        | `[]`                      | Mappings of violations per url to ignore. Example: `{ 'http://localhost:9001/index.html': ['Violation to ignore'] }` |
 | `errorTags`               | `string[]`  | `['wcag2a', 'wcag2aa', 'wcag21aa']` | Array of [tags](https://www.deque.com/axe/axe-for-web/documentation/api-documentation/#parameters) which would consider violation as error. |
-| `reporter`                | `default`   | `simple` or `default`        | Which reporter to use. |
+| `reporter`                | `default`   | `simple∣default`          | Which reporter to use. |
 | `logger`                  | `function`  | `console.log`             | Logger function to use. |
 | `axe`                     | `{}`        |                           | [Axe-core](https://github.com/dequelabs/axe-core) config. |
 | `axe.context`             | `{}`        | `element: { include: ['html'] }` | [Context parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#context-parameter). |
