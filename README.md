@@ -53,5 +53,8 @@ Prints accessibility report with logger function and returns counts of passes, f
 | `axe.context`             | `{}`        | `element: { include: ['html'] }` | [Context parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#context-parameter). |
 | `axe.options`             | `{}`        | `{}` | [Axe-core options parameter](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter). |
 
+## Related
+[a11y-static-report](https://github.com/danielhusar/a11y-static-report)
+
 ## License
 MIT
